@@ -11,16 +11,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = "voiceai-secret-key-2024";
 
-app.get("/", (req, res) => {
-  res.json({ 
-    message: "🎉 VoiceAI Backend API",
-    status: "running",
-    version: "1.0.0",
-    endpoints: {
-      public: ["/", "/api/health", "/api/test", "/api/auth/register", "/api/auth/login"],
-      protected: "Requires Authorization header"
-    }
-  });
 
 // Middleware
 app.use(cors());
@@ -89,6 +79,17 @@ const User = mongoose.model("User", userSchema);
 const Conversation = mongoose.model("Conversation", conversationSchema);
 const VoiceSample = mongoose.model("VoiceSample", voiceSampleSchema);
 const Settings = mongoose.model("Settings", settingsSchema);
+
+app.get("/", (req, res) => {
+  res.json({ 
+    message: "🎉 VoiceAI Backend API",
+    status: "running",
+    version: "1.0.0",
+    endpoints: {
+      public: ["/", "/api/health", "/api/test", "/api/auth/register", "/api/auth/login"],
+      protected: "Requires Authorization header"
+    }
+  });
 
 // Middleware to verify JWT token
 const authenticateToken = (req, res, next) => {
